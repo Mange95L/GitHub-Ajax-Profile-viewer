@@ -1,8 +1,19 @@
 $(document).ready(function(){
+  //Loading Spinner
+  var $loading = $('#loadingDiv').hide();
+    $(document)
+    .ajaxStart(function () {
+      $loading.show();
+    })
+    .ajaxStop(function () {
+      $loading.hide();
+    });
+
+    // Listen
     $('#searchUser').on('keyup', function(e){
       let username = e.target.value;
       
-      // Make request to Github
+      // Ajax Req to Github Api
       $.ajax({
           url:'https://api.github.com/users/'+username,
           data:{
@@ -21,37 +32,36 @@ $(document).ready(function(){
         }).done(function(repos){
           $.each(repos, function(index, repo){
             $('#repos').append(`
-             
             <div class="box" style="border-radius: 0 !important;">
   <article class="media">
-    
     <div class="media-content">
       <div class="content">
-        <p>
-          <strong>${repo.name}</strong> <small>Forks count: ${repo.forks_count}, </small><small>Watchers count: ${repo.watchers_count}, </small><small>Stargazers count: ${repo.stargazers_count}</small>
-          <br>
-          ${repo.description}
-        </p>
+          <strong>${repo.name}</strong><br>
+          <span class="tag is-light">Forks: ${repo.forks_count}</span>
+          <span class="tag is-light">Watchers: ${repo.watchers_count}</span>
+          <span class="tag is-light">stars: ${repo.stargazers_count}</span><br><br>
+        <div class="notification">
+        ${repo.description}
+</div>
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
          
-          <a class="level-item" aria-label="like" href="${repo.html_url}">Visit repo 
+          <a class="level-item" aria-label="like" href="${repo.html_url}">View repo 
             <span class="icon is-small">
               <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </span>
           </a>
+          
         </div>
       </nav>
     </div>
   </article>
 </div>   
-                  
             `);
           });
         });
         $('#profile').html(`
-          
         <progress class="progress is-success" value="${user.public_repos}" max="100"></progress>
         <nav class="level is-mobile">
                 <div class="level-item has-text-centered">
@@ -79,7 +89,6 @@ $(document).ready(function(){
                   </div>
                 </div>
               </nav>
-
         <div class="box">
   <article class="media">
     <div class="media-left">

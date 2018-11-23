@@ -6,6 +6,15 @@
     <title>Github Searcher</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+    .icon{
+      margin-left: 5px;
+    }
+  a:hover{
+    color: #3273dc;
+    text-decoration: underline;
+  }
+    </style>
   </head>
   <body>
       <section class="hero is-warning">
@@ -16,27 +25,30 @@
               </h1>
               <h2 class="subtitle">
                 Search for your GitHub profile name.
+                <span id="loadingDiv">
+                  <i class="fa fa-spinner fa-spin" style="font-size:30px;"></i>
+                </span>
               </h2>
+              
             </div>
           </div>
+          
         </section>
         <br>
   <div class="container">
-
-      <!-- <h1 class="is-size-1">Github search</h1> -->
       <div class="field">
   <div class="control">
-    <input class="input" type="text" id="searchUser" placeholder="Enter Github Profile name" class="form-control" autofocus>
+    <input class="input" type="text" id="searchUser" placeholder="Enter Github Profile name" class="form-control" autofocus>  
   </div>
   </div>
-  <div id="profile"></div>
+  <div id="profile">
+  </div>
   <div id="repos"></div>
 </div>
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
       <strong>Created by </strong> <a href="#">Magnus Landén</a>. 
-      
     </p>
   </div>
 </footer>
